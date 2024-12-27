@@ -58,6 +58,39 @@ export const PageControls = ({ controls, onNavigate, metadata, content }: PageCo
     );
   }
 
+  if (metadata.pageId === "advanced-search" && alternativePages && alternativePages.length === 3) {
+    return (
+      <div className="flex justify-between w-full mt-8">
+        <Button
+          className={`${alternativePages[0].className || "bg-black hover:bg-gray-900"} text-white font-medium px-8 h-12 rounded-lg`}
+          onPress={() => onNavigate(alternativePages[0].targetPage)}
+          size="lg"
+        >
+          {alternativePages[0].label}
+        </Button>
+        <Button
+          className={`${alternativePages[1].className || "bg-[#10B981] hover:bg-[#059669]"} text-white font-medium px-8 h-12 rounded-lg`}
+          onPress={() => {
+            if (alternativePages[1].onClick) {
+              alternativePages[1].onClick();
+            }
+            onNavigate(alternativePages[1].targetPage);
+          }}
+          size="lg"
+        >
+          {alternativePages[1].label}
+        </Button>
+        <Button
+          className={`${alternativePages[2].className || "bg-[#0047CC] hover:bg-[#0037A1]"} text-white font-medium px-8 h-12 rounded-lg`}
+          onPress={() => onNavigate(alternativePages[2].targetPage)}
+          size="lg"
+        >
+          {alternativePages[2].label}
+        </Button>
+      </div>
+    );
+  }
+
   if ((isKnownThreatMaker || metadata.pageId === "google-search") && alternativePages && alternativePages.length === 2) {
     return (
       <>

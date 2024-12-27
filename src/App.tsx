@@ -6,6 +6,7 @@ import { SafetyConsiderationsPage } from "./pages/SafetyConsiderationsPage";
 import { KnownThreatMakerPage } from "./pages/KnownThreatMakerPage";
 import { ImmediateActionRequiredPage } from "./pages/ImmediateActionRequiredPage";
 import { GoogleSearchPage } from "./pages/GoogleSearchPage";
+import { AdvancedSearchPage } from "./pages/AdvancedSearchPage";
 import { SocialMediaAccountsPage } from "./pages/SocialMediaAccountsPage";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       {currentPage === "action-required" && <ImmediateActionRequiredPage onNavigate={handleNavigate} />}
       {currentPage === "google-search" && <GoogleSearchPage onNavigate={handleNavigate} />}
       {currentPage === "social-media" && <SocialMediaAccountsPage onNavigate={handleNavigate} />}
+      {currentPage === "advanced-search" && <AdvancedSearchPage onNavigate={handleNavigate} />}
     </>
   );
 }

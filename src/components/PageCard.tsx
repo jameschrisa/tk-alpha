@@ -6,7 +6,7 @@ interface PageCardProps {
 }
 
 export const PageCard = ({ content, metadata }: PageCardProps) => {
-  const { title, description, legalText } = content;
+  const { title, description, legalText, headerAction } = content;
   const isWelcomePage = metadata.pageId === "terms";
 
   const textColorClass = "text-gray-900";
@@ -14,7 +14,10 @@ export const PageCard = ({ content, metadata }: PageCardProps) => {
 
   return (
     <div className={`${isWelcomePage ? "bg-white rounded-lg p-6" : ""}`}>
-      <h2 className={`text-2xl font-bold ${textColorClass} mb-8`}>{title}</h2>
+      <div className="flex items-center justify-between mb-8">
+        <h2 className={`text-2xl font-bold ${textColorClass}`}>{title}</h2>
+        {headerAction && <div>{headerAction}</div>}
+      </div>
       {description && <p className={`mb-6 ${mutedTextColorClass}`}>{description}</p>}
       {legalText && (
         <div className={`prose prose-sm max-w-none ${mutedTextColorClass}`}>

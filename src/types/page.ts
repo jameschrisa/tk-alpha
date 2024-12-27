@@ -9,6 +9,7 @@ export interface PageContent {
   helpText?: string;
   legalText?: React.ReactNode;
   breadcrumbs?: string[];
+  headerAction?: React.ReactNode;
 }
 
 export interface AlternativePage {
@@ -16,6 +17,7 @@ export interface AlternativePage {
   targetPage: string;
   label?: string;
   className?: string;
+  onClick?: () => void;
 }
 
 
