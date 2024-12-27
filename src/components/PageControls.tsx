@@ -91,26 +91,24 @@ export const PageControls = ({ controls, onNavigate, metadata, content }: PageCo
     );
   }
 
-  if ((isKnownThreatMaker || metadata.pageId === "google-search") && alternativePages && alternativePages.length === 2) {
+  if ((isKnownThreatMaker || metadata.pageId === "google-search" || metadata.pageId === "social-media") && alternativePages && alternativePages.length === 2) {
     return (
       <>
         <div className="flex justify-between w-full mt-8">
-          <div className="flex gap-4">
-            <Button
-              className={`${alternativePages[1].className || "bg-black hover:bg-gray-900"} text-white font-medium px-8 h-12 rounded-lg`}
-              onPress={() => onNavigate(alternativePages[1].targetPage)}
-              size="lg"
-            >
-              {alternativePages[1].label}
-            </Button>
-            <Button
-              className={`${alternativePages[0].className || "bg-[#0047CC] hover:bg-[#0037A1]"} text-white font-medium px-8 h-12 rounded-lg`}
-              onPress={() => onNavigate(alternativePages[0].targetPage)}
-              size="lg"
-            >
-              {alternativePages[0].label}
-            </Button>
-          </div>
+          <Button
+            className={`${alternativePages[1].className || "bg-black hover:bg-gray-900"} text-white font-medium px-8 h-12 rounded-lg`}
+            onPress={() => onNavigate(alternativePages[1].targetPage)}
+            size="lg"
+          >
+            {alternativePages[1].label}
+          </Button>
+          <Button
+            className={`${alternativePages[0].className || "bg-[#0047CC] hover:bg-[#0037A1]"} text-white font-medium px-8 h-12 rounded-lg`}
+            onPress={() => onNavigate(alternativePages[0].targetPage)}
+            size="lg"
+          >
+            {alternativePages[0].label}
+          </Button>
         </div>
       </>
     );

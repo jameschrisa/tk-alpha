@@ -30,8 +30,8 @@ function App() {
       {currentPage === "known-threat-maker" && <KnownThreatMakerPage onNavigate={handleNavigate} />}
       {currentPage === "action-required" && <ImmediateActionRequiredPage onNavigate={handleNavigate} />}
       {currentPage === "google-search" && <GoogleSearchPage onNavigate={handleNavigate} />}
-      {currentPage === "social-media" && <SocialMediaAccountsPage onNavigate={handleNavigate} />}
       {currentPage === "advanced-search" && <AdvancedSearchPage onNavigate={handleNavigate} />}
+      {currentPage === "social-media" && <SocialMediaAccountsPage onNavigate={handleNavigate} />}
     </>
   );
 }
