@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Page } from "../components/Page";
 import { PageProps } from "../types/page";
 import { Users } from "lucide-react";
+import { Select, SelectItem } from "@nextui-org/react";
 
 const PLATFORMS = [
   "Facebook",
@@ -12,10 +13,20 @@ const PLATFORMS = [
   "Discord",
   "YouTube",
   "Other"
-];
+] as const;
 
 export const SocialMediaAccountsPage = ({ onNavigate }: { onNavigate: (targetPage: string) => void }) => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>("");
+
+  const handlePlatformChange = (platform: string | number | boolean) => {
+    if (typeof platform !== 'string') return;
+    setSelectedPlatform(platform);
+  };
+
+  const getTargetPage = () => {
+    if (!selectedPlatform) return "";
+    return `${selectedPlatform.toLowerCase()}-search`;
+  };
 
   const pageProps: PageProps = {
     metadata: {
@@ -44,44 +55,52 @@ export const SocialMediaAccountsPage = ({ onNavigate }: { onNavigate: (targetPag
               </p>
               <div className="space-y-2">
                 <p>Click which platform you want to search.</p>
-                <select
-                  value={selectedPlatform}
-                  onChange={(e) => setSelectedPlatform(e.target.value)}
-                  className="w-full max-w-xs h-12 px-4 border border-[#10B981] text-gray-900 bg-white appearance-none text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981] focus:border-transparent"
-                  style={{ 
-                    backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'right 1rem center',
-                    backgroundSize: '1rem'
+                <Select
+                  selectedKeys={selectedPlatform ? [selectedPlatform] : []}
+                  onSelectionChange={(keys) => handlePlatformChange([...keys][0])}
+                  placeholder="Select Platform"
+                  aria-label="Select social media platform"
+                  className="max-w-xs"
+                  variant="bordered"
+                  classNames={{
+                    trigger: "h-12 border-[#10B981] data-[hover=true]:border-[#059669] rounded-lg bg-white",
+                    value: "text-gray-900",
+                    base: "min-h-12",
                   }}
                 >
-                  <option value="" disabled>Select Platform</option>
                   {PLATFORMS.map(platform => (
-                    <option key={platform} value={platform}>{platform}</option>
+                    <SelectItem key={platform} value={platform}>
+                      {platform}
+                    </SelectItem>
                   ))}
-                </select>
+                </Select>
               </div>
             </div>
           </div>
         </div>
       ),
     },
-      controls: {
-        alternativePages: [
-          {
-            controlId: "upload",
-            label: "Upload and Tag",
-            targetPage: "upload-screenshots",
-            className: "bg-[#0047CC] hover:bg-[#0037A1]"
-          },
-          {
-            controlId: "back",
-            label: "Back",
-            targetPage: "google-search",
-            className: "bg-black hover:bg-gray-900"
+    controls: {
+      alternativePages: [
+        {
+          controlId: "upload",
+          label: "Continue",
+          targetPage: getTargetPage(),
+          className: "bg-[#0047CC] hover:bg-[#0037A1]",
+          onClick: () => {
+            if (selectedPlatform) {
+              onNavigate(getTargetPage());
+            }
           }
-        ]
-      },
+        },
+        {
+          controlId: "back",
+          label: "Back",
+          targetPage: "google-search",
+          className: "bg-black hover:bg-gray-900"
+        }
+      ]
+    },
   };
 
   return <Page {...pageProps} onNavigate={onNavigate} />;
