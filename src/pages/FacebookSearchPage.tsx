@@ -5,7 +5,7 @@ export const FacebookSearchPage = ({ onNavigate }: { onNavigate: (targetPage: st
   const pageProps: PageProps = {
     metadata: {
       pageId: "facebook-search",
-      controlIds: ["back", "upload"],
+      controlIds: ["return", "upload"],
     },
     content: {
       breadcrumbs: ["Start", "Begin Data Collection", "Threat Maker", "Safety Considerations", "KTM", "Social Media", "Facebook"],
@@ -42,19 +42,19 @@ export const FacebookSearchPage = ({ onNavigate }: { onNavigate: (targetPage: st
     controls: {
       alternativePages: [
         {
-          controlId: "back",
-          label: "Back",
+          controlId: "return",
+          label: "Return to Social Media Platforms",
           targetPage: "social-media",
-          className: "bg-black hover:bg-gray-900"
+          className: "bg-[#0047CC] hover:bg-[#0037A1]"
         },
         {
           controlId: "upload",
           label: "Upload and Tag",
           targetPage: "upload-screenshots",
-          className: "bg-[#0047CC] hover:bg-[#0037A1]"
+          className: "bg-[#10B981] hover:bg-[#059669]"
         }
       ]
-    },
+    }
   };
 
   return <Page {...pageProps} onNavigate={onNavigate} />;

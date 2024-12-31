@@ -91,6 +91,28 @@ export const PageControls = ({ controls, onNavigate, metadata, content }: PageCo
     );
   }
 
+  // Handle social media platform pages
+  if (metadata.pageId.endsWith("-search") && metadata.pageId !== "google-search" && metadata.pageId !== "advanced-search") {
+    return (
+      <div className="flex justify-between w-full mt-8">
+        <Button
+          className="bg-[#0047CC] hover:bg-[#0037A1] text-white font-medium px-8 h-12 rounded-lg flex-1 mr-4"
+          onPress={() => onNavigate("social-media")}
+          size="lg"
+        >
+          Return to Social Media Platforms
+        </Button>
+        <Button
+          className="bg-[#10B981] hover:bg-[#059669] text-white font-medium px-8 h-12 rounded-lg flex-1"
+          onPress={() => onNavigate("upload-screenshots")}
+          size="lg"
+        >
+          Upload and Tag
+        </Button>
+      </div>
+    );
+  }
+
   if ((isKnownThreatMaker || metadata.pageId === "google-search" || metadata.pageId === "social-media") && alternativePages && alternativePages.length === 2) {
     return (
       <>
