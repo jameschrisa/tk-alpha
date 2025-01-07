@@ -1,14 +1,22 @@
 import { Page } from "../components/Page";
 import { PageProps } from "../types/page";
 
-export const FacebookSearchPage = ({ onNavigate }: { onNavigate: (targetPage: string) => void }) => {
+export const FacebookSearchPage = ({ onNavigate }: { onNavigate: (targetPage: string, platform?: string) => void }) => {
   const pageProps: PageProps = {
     metadata: {
       pageId: "facebook-search",
-      controlIds: ["return", "upload"],
+      controlIds: ["return", "upload", "save"],
     },
     content: {
-      breadcrumbs: ["Start", "Begin Data Collection", "Threat Maker", "Safety Considerations", "KTM", "Social Media", "Facebook"],
+      breadcrumbs: [
+        { label: "Start", onClick: () => onNavigate("terms") },
+        { label: "Begin Data Collection", onClick: () => onNavigate("data-collection") },
+        { label: "Threat Maker", onClick: () => onNavigate("threat-maker") },
+        { label: "Safety Considerations", onClick: () => onNavigate("safety-considerations") },
+        { label: "KTM", onClick: () => onNavigate("known-threat-maker") },
+        { label: "Social Media", onClick: () => onNavigate("social-media") },
+        { label: "Facebook" }
+      ],
       title: "Facebook Search",
       legalText: (
         <div className="space-y-6">
@@ -50,7 +58,14 @@ export const FacebookSearchPage = ({ onNavigate }: { onNavigate: (targetPage: st
         {
           controlId: "upload",
           label: "Upload and Tag",
-          targetPage: "upload-screenshots",
+          targetPage: "tag-upload",
+          className: "bg-[#10B981] hover:bg-[#059669]",
+          onClick: () => onNavigate("tag-upload", "facebook")
+        },
+        {
+          controlId: "save",
+          label: "Save and Continue",
+          targetPage: "social-media",
           className: "bg-[#10B981] hover:bg-[#059669]"
         }
       ]

@@ -3,7 +3,7 @@ import { PageControls as PageControlsType, PageMetadata, PageContent } from "../
 
 interface PageControlsProps {
   controls: PageControlsType;
-  onNavigate: (targetPage: string) => void;
+  onNavigate: (targetPage: string, platform?: string) => void;
   metadata: PageMetadata;
 }
 
@@ -94,17 +94,23 @@ export const PageControls = ({ controls, onNavigate, metadata, content }: PageCo
   // Handle social media platform pages
   if (metadata.pageId.endsWith("-search") && metadata.pageId !== "google-search" && metadata.pageId !== "advanced-search") {
     return (
-      <div className="flex justify-between w-full mt-8">
+      <div className="flex flex-col gap-4 w-full mt-8">
         <Button
-          className="bg-[#0047CC] hover:bg-[#0037A1] text-white font-medium px-8 h-12 rounded-lg flex-1 mr-4"
-          onPress={() => onNavigate("social-media")}
+          className="bg-[#0047CC] hover:bg-[#0037A1] text-white font-medium h-12 rounded-lg w-full"
+          onPress={() => onNavigate("social-media", metadata.pageId.replace("-search", ""))}
           size="lg"
         >
           Return to Social Media Platforms
         </Button>
         <Button
-          className="bg-[#10B981] hover:bg-[#059669] text-white font-medium px-8 h-12 rounded-lg flex-1"
-          onPress={() => onNavigate("upload-screenshots")}
+          className="bg-[#10B981] hover:bg-[#059669] text-white font-medium h-12 rounded-lg w-full"
+          onPress={() => {
+            if (alternativePages && alternativePages[1] && alternativePages[1].onClick) {
+              alternativePages[1].onClick();
+            } else {
+              onNavigate("upload-screenshots", metadata.pageId.replace("-search", ""));
+            }
+          }}
           size="lg"
         >
           Upload and Tag

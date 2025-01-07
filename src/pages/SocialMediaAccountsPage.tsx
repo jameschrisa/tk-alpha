@@ -34,7 +34,14 @@ export const SocialMediaAccountsPage = ({ onNavigate }: { onNavigate: (targetPag
       controlIds: ["back", "upload"],
     },
     content: {
-      breadcrumbs: ["Start", "Begin Data Collection", "Threat Maker", "Safety Considerations", "KTM", "Social Media"],
+      breadcrumbs: [
+        { label: "Start", onClick: () => onNavigate("terms") },
+        { label: "Begin Data Collection", onClick: () => onNavigate("data-collection") },
+        { label: "Threat Maker", onClick: () => onNavigate("threat-maker") },
+        { label: "Safety Considerations", onClick: () => onNavigate("safety-considerations") },
+        { label: "KTM", onClick: () => onNavigate("known-threat-maker") },
+        { label: "Social Media" }
+      ],
       title: "Social Media Accounts",
       headerAction: (
         <button

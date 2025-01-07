@@ -8,7 +8,10 @@ export interface PageContent {
   description?: string;
   helpText?: string;
   legalText?: React.ReactNode;
-  breadcrumbs?: string[];
+  breadcrumbs?: Array<{
+    label: string;
+    onClick?: () => void;
+  }>;
   headerAction?: React.ReactNode;
 }
 

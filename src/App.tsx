@@ -16,15 +16,21 @@ import { SnapchatSearchPage } from "./pages/SnapchatSearchPage";
 import { DiscordSearchPage } from "./pages/DiscordSearchPage";
 import { YouTubeSearchPage } from "./pages/YouTubeSearchPage";
 import { OtherSearchPage } from "./pages/OtherSearchPage";
+import { TagUploadPage } from "./pages/TagUploadPage";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("known-threat-maker");
+  const [selectedPlatform, setSelectedPlatform] = useState("");
 
-  const handleNavigate = (targetPage: string) => {
+  const handleNavigate = (targetPage: string, platform?: string) => {
     if (targetPage === "exit-session") {
       // In a real app, this would handle session cleanup
       setCurrentPage("terms");
+      setSelectedPlatform("");
       return;
+    }
+    if (platform) {
+      setSelectedPlatform(platform);
     }
     setCurrentPage(targetPage);
   };
@@ -48,6 +54,7 @@ function App() {
       {currentPage === "discord-search" && <DiscordSearchPage onNavigate={handleNavigate} />}
       {currentPage === "youtube-search" && <YouTubeSearchPage onNavigate={handleNavigate} />}
       {currentPage === "other-search" && <OtherSearchPage onNavigate={handleNavigate} />}
+      {currentPage === "tag-upload" && <TagUploadPage onNavigate={handleNavigate} platform={selectedPlatform} />}
     </>
   );
 }

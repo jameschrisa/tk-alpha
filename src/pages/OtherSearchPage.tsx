@@ -8,7 +8,15 @@ export const OtherSearchPage = ({ onNavigate }: { onNavigate: (targetPage: strin
       controlIds: ["back", "upload"],
     },
     content: {
-      breadcrumbs: ["Start", "Begin Data Collection", "Threat Maker", "Safety Considerations", "KTM", "Social Media", "Other"],
+      breadcrumbs: [
+        { label: "Start", onClick: () => onNavigate("terms") },
+        { label: "Begin Data Collection", onClick: () => onNavigate("data-collection") },
+        { label: "Threat Maker", onClick: () => onNavigate("threat-maker") },
+        { label: "Safety Considerations", onClick: () => onNavigate("safety-considerations") },
+        { label: "KTM", onClick: () => onNavigate("known-threat-maker") },
+        { label: "Social Media", onClick: () => onNavigate("social-media") },
+        { label: "Other" }
+      ],
       title: "Other Platform Search",
       legalText: (
         <div className="space-y-6">

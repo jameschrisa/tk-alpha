@@ -4,7 +4,7 @@ import { PageControls } from "./PageControls";
 import SSTLogo from "../assets/sst-logo.svg";
 
 interface BasePageProps extends PageProps {
-  onNavigate: (targetPage: string) => void;
+  onNavigate: (targetPage: string, platform?: string) => void;
 }
 
 export const Page = ({ metadata, content, controls, onNavigate }: BasePageProps) => {
@@ -37,57 +37,41 @@ export const Page = ({ metadata, content, controls, onNavigate }: BasePageProps)
         {!isWelcomePage && content.breadcrumbs && (
           <div className="mb-6">
             <div className="flex items-center gap-2 text-sm">
-              {content.breadcrumbs.map((crumb, index) => (
-                <div key={crumb} className="flex items-center">
-                  {index === content.breadcrumbs!.length - 1 ? (
-                    <span className="text-gray-900">{crumb}</span>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        switch (index) {
-                          case 0: // Start
-                            onNavigate("terms");
-                            break;
-                          case 1: // Begin Data Collection
-                            onNavigate("data-collection");
-                            break;
-                          case 2: // Threat Maker
-                            onNavigate("threat-maker");
-                            break;
-                          case 3: // Safety Considerations
-                            onNavigate("safety-considerations");
-                            break;
-                          case 4: // KTM
-                            onNavigate("known-threat-maker");
-                            break;
-                        }
-                      }}
-                      className="text-blue-600 hover:text-blue-500"
-                    >
-                      {crumb}
-                    </button>
-                  )}
-                  {index < content.breadcrumbs!.length - 1 && (
-                    <span className="text-gray-400 mx-2">›</span>
-                  )}
-                </div>
-              ))}
+          {content.breadcrumbs.map((crumb, index) => (
+            <div key={index} className="flex items-center">
+              {index === content.breadcrumbs!.length - 1 ? (
+                <span className="text-gray-900">{crumb.label}</span>
+              ) : (
+                <button
+                  onClick={crumb.onClick}
+                  className="text-blue-600 hover:text-blue-500"
+                >
+                  {crumb.label}
+                </button>
+              )}
+              {index < content.breadcrumbs!.length - 1 && (
+                <span className="text-gray-400 mx-2">›</span>
+              )}
+            </div>
+          ))}
             </div>
           </div>
         )}
-        <div className={`${isWelcomePage ? "bg-[#0A1629]" : "bg-white border"} rounded-2xl p-8 ${!isWelcomePage && "shadow-2xl"}`}>
-          <div className="p-2">
-            <PageCard content={content} metadata={metadata} />
+        <div className="space-y-8">
+          <div className={`${isWelcomePage ? "bg-[#0A1629]" : "bg-white border"} rounded-2xl p-8 ${!isWelcomePage && "shadow-2xl"}`}>
+            <div className="p-2">
+              <PageCard content={content} metadata={metadata} />
+            </div>
           </div>
-        </div>
-        
-        <div className="space-y-4">
-          <PageControls controls={controls} onNavigate={onNavigate} metadata={metadata} content={content} />
-          {isWelcomePage && (
-            <p className="text-center text-white text-sm mt-4">
-              By clicking "Agree and Proceed", you acknowledge that you have read and agree to the terms above.
-            </p>
-          )}
+          
+          <div className="space-y-4">
+            <PageControls controls={controls} onNavigate={onNavigate} metadata={metadata} content={content} />
+            {isWelcomePage && (
+              <p className="text-center text-white text-sm mt-4">
+                By clicking "Agree and Proceed", you acknowledge that you have read and agree to the terms above.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
