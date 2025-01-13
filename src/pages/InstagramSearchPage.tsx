@@ -5,10 +5,18 @@ export const InstagramSearchPage = ({ onNavigate }: { onNavigate: (targetPage: s
   const pageProps: PageProps = {
     metadata: {
       pageId: "instagram-search",
-      controlIds: ["return", "upload"],
+      controlIds: ["back", "upload"],
     },
     content: {
-      breadcrumbs: ["Start", "Begin Data Collection", "Threat Maker", "Safety Considerations", "KTM", "Social Media", "Instagram"],
+      breadcrumbs: [
+        { label: "Start", onClick: () => onNavigate("terms") },
+        { label: "Begin Data Collection", onClick: () => onNavigate("data-collection") },
+        { label: "Threat Maker", onClick: () => onNavigate("threat-maker") },
+        { label: "Safety Considerations", onClick: () => onNavigate("safety-considerations") },
+        { label: "KTM", onClick: () => onNavigate("known-threat-maker") },
+        { label: "Social Media", onClick: () => onNavigate("social-media") },
+        { label: "Instagram" }
+      ],
       title: "Instagram Search",
       legalText: (
         <div className="space-y-6">
@@ -38,17 +46,16 @@ export const InstagramSearchPage = ({ onNavigate }: { onNavigate: (targetPage: s
     controls: {
       alternativePages: [
         {
-          controlId: "return",
+          controlId: "back",
           label: "Return to Social Media Platforms",
           targetPage: "social-media",
-          className: "bg-[#0047CC] hover:bg-[#0037A1]"
+          className: "bg-black hover:bg-gray-900"
         },
         {
           controlId: "upload",
           label: "Upload and Tag",
           targetPage: "tag-upload",
-          className: "bg-[#10B981] hover:bg-[#059669]",
-          onClick: () => onNavigate("tag-upload", "instagram")
+          className: "bg-[#0047CC] hover:bg-[#0037A1]"
         }
       ]
     }

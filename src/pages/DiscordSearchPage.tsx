@@ -51,14 +51,14 @@ export const DiscordSearchPage = ({ onNavigate }: { onNavigate: (targetPage: str
       alternativePages: [
         {
           controlId: "back",
-          label: "Back",
+          label: "Return to Social Media Platforms",
           targetPage: "social-media",
           className: "bg-black hover:bg-gray-900"
         },
         {
           controlId: "upload",
           label: "Upload and Tag",
-          targetPage: "upload-screenshots",
+          targetPage: "tag-upload",
           className: "bg-[#0047CC] hover:bg-[#0037A1]"
         }
       ]

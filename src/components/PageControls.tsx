@@ -92,34 +92,28 @@ export const PageControls = ({ controls, onNavigate, metadata, content }: PageCo
   }
 
   // Handle social media platform pages
-  if (metadata.pageId.endsWith("-search") && metadata.pageId !== "google-search" && metadata.pageId !== "advanced-search") {
+  if (metadata.pageId.endsWith("-search") && metadata.pageId !== "google-search" && metadata.pageId !== "advanced-search" && alternativePages) {
     return (
       <div className="flex flex-col gap-4 w-full mt-8">
         <Button
-          className="bg-[#0047CC] hover:bg-[#0037A1] text-white font-medium h-12 rounded-lg w-full"
-          onPress={() => onNavigate("social-media", metadata.pageId.replace("-search", ""))}
+          className={`${alternativePages[0].className} text-white font-medium h-12 rounded-lg w-full`}
+          onPress={() => onNavigate(alternativePages[0].targetPage)}
           size="lg"
         >
-          Return to Social Media Platforms
+          {alternativePages[0].label}
         </Button>
         <Button
-          className="bg-[#10B981] hover:bg-[#059669] text-white font-medium h-12 rounded-lg w-full"
-          onPress={() => {
-            if (alternativePages && alternativePages[1] && alternativePages[1].onClick) {
-              alternativePages[1].onClick();
-            } else {
-              onNavigate("upload-screenshots", metadata.pageId.replace("-search", ""));
-            }
-          }}
+          className={`${alternativePages[1].className} text-white font-medium h-12 rounded-lg w-full`}
+          onPress={() => onNavigate(alternativePages[1].targetPage)}
           size="lg"
         >
-          Upload and Tag
+          {alternativePages[1].label}
         </Button>
       </div>
     );
   }
 
-  if ((isKnownThreatMaker || metadata.pageId === "google-search" || metadata.pageId === "social-media") && alternativePages && alternativePages.length === 2) {
+  if ((isKnownThreatMaker || metadata.pageId === "google-search" || metadata.pageId === "social-media" || metadata.pageId === "tag-upload") && alternativePages && alternativePages.length === 2) {
     return (
       <>
         <div className="flex justify-between w-full mt-8">

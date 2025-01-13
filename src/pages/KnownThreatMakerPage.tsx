@@ -9,7 +9,13 @@ export const KnownThreatMakerPage = ({ onNavigate }: { onNavigate: (targetPage: 
       controlIds: ["back", "has-username", "no-username"],
     },
     content: {
-      breadcrumbs: ["Start", "Begin Data Collection", "Threat Maker", "Safety Considerations", "KTM"],
+      breadcrumbs: [
+        { label: "Start", onClick: () => onNavigate("terms") },
+        { label: "Begin Data Collection", onClick: () => onNavigate("data-collection") },
+        { label: "Threat Maker", onClick: () => onNavigate("threat-maker") },
+        { label: "Safety Considerations", onClick: () => onNavigate("safety-considerations") },
+        { label: "KTM" }
+      ],
       title: "Known Threat Maker (KTM)",
       legalText: (
         <div className="flex gap-8">

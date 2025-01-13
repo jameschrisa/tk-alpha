@@ -5,7 +5,7 @@ export const FacebookSearchPage = ({ onNavigate }: { onNavigate: (targetPage: st
   const pageProps: PageProps = {
     metadata: {
       pageId: "facebook-search",
-      controlIds: ["return", "upload", "save"],
+      controlIds: ["back", "upload"],
     },
     content: {
       breadcrumbs: [
@@ -50,23 +50,16 @@ export const FacebookSearchPage = ({ onNavigate }: { onNavigate: (targetPage: st
     controls: {
       alternativePages: [
         {
-          controlId: "return",
+          controlId: "back",
           label: "Return to Social Media Platforms",
           targetPage: "social-media",
-          className: "bg-[#0047CC] hover:bg-[#0037A1]"
+          className: "bg-black hover:bg-gray-900"
         },
         {
           controlId: "upload",
           label: "Upload and Tag",
           targetPage: "tag-upload",
-          className: "bg-[#10B981] hover:bg-[#059669]",
-          onClick: () => onNavigate("tag-upload", "facebook")
-        },
-        {
-          controlId: "save",
-          label: "Save and Continue",
-          targetPage: "social-media",
-          className: "bg-[#10B981] hover:bg-[#059669]"
+          className: "bg-[#0047CC] hover:bg-[#0037A1]"
         }
       ]
     }

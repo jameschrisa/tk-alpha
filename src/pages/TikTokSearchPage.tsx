@@ -8,7 +8,15 @@ export const TikTokSearchPage = ({ onNavigate }: { onNavigate: (targetPage: stri
       controlIds: ["return", "upload"],
     },
     content: {
-      breadcrumbs: ["Start", "Begin Data Collection", "Threat Maker", "Safety Considerations", "KTM", "Social Media", "TikTok"],
+      breadcrumbs: [
+        { label: "Start", onClick: () => onNavigate("terms") },
+        { label: "Begin Data Collection", onClick: () => onNavigate("data-collection") },
+        { label: "Threat Maker", onClick: () => onNavigate("threat-maker") },
+        { label: "Safety Considerations", onClick: () => onNavigate("safety-considerations") },
+        { label: "KTM", onClick: () => onNavigate("known-threat-maker") },
+        { label: "Social Media", onClick: () => onNavigate("social-media") },
+        { label: "TikTok" }
+      ],
       title: "TikTok Search",
       legalText: (
         <div className="space-y-6">
@@ -47,8 +55,7 @@ export const TikTokSearchPage = ({ onNavigate }: { onNavigate: (targetPage: stri
           controlId: "upload",
           label: "Upload and Tag",
           targetPage: "tag-upload",
-          className: "bg-[#10B981] hover:bg-[#059669]",
-          onClick: () => onNavigate("tag-upload", "tiktok")
+          className: "bg-[#0047CC] hover:bg-[#0037A1]"
         }
       ]
     }
